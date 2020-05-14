@@ -7,10 +7,10 @@
   <groupId>com.elgo</groupId>
   <artifactId>pglp_5.2</artifactId>
   <version>1</version>
+  <packaging>jar</packaging>
 
   <name>pglp_5.2</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <url>http://maven.apache.org</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -24,6 +24,11 @@
       <artifactId>junit</artifactId>
       <version>4.11</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.derby</groupId>
+      <artifactId>derby</artifactId>
+      <version>10.15.2.0</version>
     </dependency>
   </dependencies>
 
