@@ -1,41 +1,49 @@
-import com.elgo.*;
+package com.elgo;
+
 import org.junit.Test;
 
-import java.io.*;
-import java.util.Optional;
+import java.sql.Connection;
+import java.sql.ResultSet;
 
 import static org.junit.Assert.*;
 
 public class PersonnelDAOTest {
-    private static DAO_API<Personnel> personnelDAO_api;
+
+    Personnel p1 = new PersonnelBuilder("DIEYE", "Gora", 1).setDateDeNaissance(2020,9,19).getPersonnel();
+    Personnel p2 = new PersonnelBuilder("BOB", "Ibo", 2).getPersonnel();
+    Personnel p3 = new PersonnelBuilder("SILVER", "Bril", 3).setDateDeNaissance(1998,8,3).getPersonnel();
+    private static void display(String message) {
+        System.out.println(message);
+    }
+
+    private static void stop(String message) {
+        System.err.println(message);
+        System.exit(99);
+    }
 
     @Test
-    public void personnelDAO() throws IOException, ClassNotFoundException {
-        personnelDAO_api = new PersonnelDAO();
-        personnelDAO_api.save( new PersonnelBuilder("Lopy", "Douglas", 3).setDateDeNaissance(2020,9,19).getPersonnel());
+    public void createPerson() {
+        Connection conn = null;
+        ResultSet resultats = null;
+        String requete = "";
 
-        Personnel p4 = new PersonnelBuilder("DAVID", "Henry", 4).setDateDeNaissance(2000,7,4).getPersonnel();
-        personnelDAO_api.save(p4);
-        personnelDAO_api.update(p4, new String[]{"Jake", "Henry"});
-        personnelDAO_api.delete(p4);
-        personnelDAO_api.getAll().forEach(personnel -> personnel.print());
+        try {
+            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+        } catch (ClassNotFoundException e) {
+            stop("Impossible de charger le pilote jdbc");
+        }
 
-        //Serializing the Object
-        FileOutputStream fos = new FileOutputStream("dao_personnel.ser");
-        ObjectOutputStream oos = new ObjectOutputStream(fos);
-        oos.writeObject(personnelDAO_api);
-        System.out.println("Object successfully serialized");
-        oos.close();
-        fos.close();
+    }
 
-        //Deserializing the object
-        System.out.println("----------------------------------------------------------------------");
-        //Deserializing the object
-        FileInputStream fis = new FileInputStream("dao_personnel.ser");
-        ObjectInputStream ois = new ObjectInputStream(fis);
-        PersonnelDAO dao_personnel = (PersonnelDAO) ois.readObject();
-        System.out.println("Deserialized sucessfully");
+    @Test
+    public void findPerson() {
+    }
 
-        dao_personnel.getAll().forEach(personnel -> personnel.print());
+    @Test
+    public void update() {
+    }
+
+    @Test
+    public void delete() {
     }
 }

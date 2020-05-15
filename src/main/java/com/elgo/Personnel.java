@@ -41,7 +41,23 @@ public class Personnel implements InterfacePersonnel {
         this.numTel = newNumtel;
     }
 
-    @Override
+    //Getters
+    public String getNom() {
+        return nom;
+    }
+    public String getPrenom() {
+        return prenom;
+    }
+    public int getId() {
+        return id;
+    }
+    public LocalDate getDateDeNaissance() {
+        return dateDeNaissance;
+    }
+    public ArrayList<Integer> getNumTel() {
+        return numTel;
+
+    }    @Override
     public void print() {
         System.out.println(
                 "Personnel: " +

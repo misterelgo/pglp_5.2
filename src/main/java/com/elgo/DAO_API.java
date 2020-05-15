@@ -1,18 +1,16 @@
 package com.elgo;
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
 public interface DAO_API<T> extends Serializable {
-    //Optional est pour éviter d'utiliser explicitement null
-    Optional<T> get(long id);
+    Connection conn = null;
 
-    List<T> getAll();
-
-    void save(T t);
-
-    void update(T t, String[] params);
-
-    void delete(T t);
+    public abstract T createPerson(T obj);
+    public abstract T findPerson(int id) throws SQLException;
+    public abstract int update(int id , String nom, String prenom);
+    public abstract int delete (int id);
 }
