@@ -4,14 +4,17 @@ import org.junit.Test;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import static org.junit.Assert.*;
 
 public class PersonnelDAOTest {
 
-    Personnel p1 = new PersonnelBuilder("DIEYE", "Gora", 1).setDateDeNaissance(2020,9,19).getPersonnel();
+    Personnel p1 = new PersonnelBuilder("DIEYE", "Gora", 1).getPersonnel();
     Personnel p2 = new PersonnelBuilder("BOB", "Ibo", 2).getPersonnel();
-    Personnel p3 = new PersonnelBuilder("SILVER", "Bril", 3).setDateDeNaissance(1998,8,3).getPersonnel();
+    Personnel p3 = new PersonnelBuilder("SILVER", "Bril", 3).getPersonnel();
+    Personnel p4 = new PersonnelBuilder("Gril", "Kil", 3).getPersonnel();
+
     private static void display(String message) {
         System.out.println(message);
     }
@@ -21,29 +24,16 @@ public class PersonnelDAOTest {
         System.exit(99);
     }
 
-    @Test
-    public void createPerson() {
-        Connection conn = null;
-        ResultSet resultats = null;
-        String requete = "";
 
-        try {
-            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
-        } catch (ClassNotFoundException e) {
-            stop("Impossible de charger le pilote jdbc");
-        }
+    @Test
+    public void testbd() throws SQLException {
+        PersonnelDAO pers1 = new PersonnelDAO();
+        //pers1.createPerson(p4);
+        //pers1.findPerson(1);
+        //pers1.delete(2);
+        pers1.printAll();
 
     }
 
-    @Test
-    public void findPerson() {
-    }
 
-    @Test
-    public void update() {
-    }
-
-    @Test
-    public void delete() {
-    }
 }

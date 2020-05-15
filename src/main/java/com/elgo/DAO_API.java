@@ -13,4 +13,5 @@ public interface DAO_API<T> extends Serializable {
     public abstract T findPerson(int id) throws SQLException;
     public abstract int update(int id , String nom, String prenom);
     public abstract int delete (int id);
+    public abstract void printAll ();
 }
