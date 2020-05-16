@@ -56,22 +56,20 @@ public class PersonnelDAO implements DAO_API<Personnel> {
         Personnel person = null;
         try {
             PreparedStatement recherchePersonne =
-                    conn.prepareStatement("SELECT * FROM personnes WHERE nom_personne = ?");
+                    conn.prepareStatement("SELECT * FROM personneL WHERE id = ?");
 
-            recherchePersonne.setInt(3, id);
+            recherchePersonne.setInt(1, id);
 
             ResultSet resultats = recherchePersonne.executeQuery();
 
-            System.out.println("parcours des données retournées");
+            System.out.println("recherche du personnel...");
 
             boolean encore = resultats.next();
 
             while (encore) {
-                System.out.print(resultats.getString(1) + " :  "+resultats.getString(2)+" "+
-                        resultats.getInt(3));
+                System.out.print(resultats.getString("nom") + ", "+resultats.getString("prenom")+", "+
+                        resultats.getString("id"));
                 System.out.println();
-                person = new PersonnelBuilder(resultats.getString("nom"), resultats.getString("prenom"), resultats.getInt("Id"))
-                        .getPersonnel();
                 encore = resultats.next();
             }
             resultats.close();
@@ -114,7 +112,6 @@ public class PersonnelDAO implements DAO_API<Personnel> {
 
     @Override
     public void printAll() {
-        Personnel person = null;
         try {
             Statement affichPersonnel =
                     conn.createStatement();
@@ -122,7 +119,7 @@ public class PersonnelDAO implements DAO_API<Personnel> {
             System.out.println("parcours des données retournées");
 
             while (res.next()) {
-                System.out.print(res.getString("nom") + " :  "+res.getString("prenom")+" "+
+                System.out.print(res.getString("nom") + ", "+res.getString("prenom")+", "+
                         res.getInt("id"));
                 System.out.println();
             }
